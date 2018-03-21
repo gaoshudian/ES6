@@ -22,7 +22,10 @@ for(let s of Object.getOwnPropertySymbols(user)){
 Object.setPrototypeOf(user,{name:"laotan"});
 console.log(user.name);
 
-//对象的合并(assign)
+/*
+对象的合并(assign)
+Object.assign方法的第一个参数是目标对象，后面的参数都是源对象
+ */
 let item={};
 let source1={
     name:"Tom"
