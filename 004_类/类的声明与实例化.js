@@ -26,6 +26,7 @@ let student1=new Student();
 console.log(student1);
 
 
+//通过立即执行函数的方式调用构造函数
 let teacher1=new class Teacher{
     constructor(name){
         this.name=name;
