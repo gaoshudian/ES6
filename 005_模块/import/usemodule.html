@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="module">
+        import {name,changeName,nums} from "./m1.js";
+        //name="laotan";
+        changeName("laotan");//不能直接用赋值的方式来修改变量，但是可以通过调用模块中的方法来修改值
+        alert(name);
+        nums[0]=10;
+        alert(nums);
+        import {nums as num} from "./m1.js";
+        alert(num);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
