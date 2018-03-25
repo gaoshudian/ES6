@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function getData(url) {
+            console.log("url=" + url);
+            return new Promise((resolve, reject) => {
+                let xhr = new XMLHttpRequest();
+                xhr.open("get", url);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+                        if (xhr.status == 200) {
+                            resolve(xhr.responseText);
+                        } else {
+                            reject("处理出错");
+                        }
+                    }
+                }
+                xhr.send();
+            });
+        }
+
+        function* execute() {
+            try {
+                let data1 = yield getData("data1.json");
+                data1 = JSON.parse(data1);
+                console.log(data1);
+                let data2 = yield getData("data2.json");
+                data2 = JSON.parse(data2);
+                console.log(data2);
+            } catch (error) {
+                console.log(error.message);
+            }
+        }
+
+        function run(g) {
+            let it = g(), e;
+            (function iterate(val) {
+                e = it.next(val);
+                if (!e.done) {
+                    e.value.then(iterate).catch(error => { it.throw(new Error(error)) });
+                }
+            })()
+            // iterate();
+        }
+
+        run(execute);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
