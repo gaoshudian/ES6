@@ -1,8 +1,14 @@
 /*
 遍历器（Iterator）是一种接口，为各种不同的数据结构提供统一的访问机制。
 任何数据结构只要部署Iterator接口，就可以完成遍历操作（即依次处理该数据结构的所有成员）
+Iterator的作用有三个：
+    一是为各种数据结构，提供一个统一的、简便的访问接口；
+    二是使得数据结构的成员能够按某种次序排列；
+    三是ES6创造了一种新的遍历命令for...of循环，Iterator接口主要供for...of消费
  */
 
+/*
+//示例一
 class Department {
     constructor() {
         this.names = ["Tom", "Jack", "Rose"];
@@ -10,7 +16,7 @@ class Department {
     [Symbol.iterator]() {
         let names = this.names;
         let position = 0;
-        let iterator = {
+        return {
             next() {
                 if (position === names.length) {
                     return {
@@ -25,7 +31,6 @@ class Department {
                 }
             }
         };
-        return iterator;
     }
 }
 
@@ -35,9 +40,10 @@ console.log(dept.names);
 for (let name of dept) {
     console.log(name);
 }
+console.log([...dept]);*/
 
-console.log([...dept]);
 
+//示例二
 class Department2 {
     constructor() {
         this.names = ["Tom", "Jack", "Rose"];
